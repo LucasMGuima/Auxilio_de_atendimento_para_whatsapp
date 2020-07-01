@@ -1,0 +1,152 @@
+<html>
+<head>
+	<meta http-equiv="Content-Language" content="pt-br">
+	<meta http-equiv="Content-Type" content="text/html;">
+	<title>*ITALIAFOTO* Nossa empresa é esp</title>
+	<style>
+		.button{
+			border: solid;
+			color: black;
+			background-color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div align="left">
+		<table border="0" cellpadding="10" width="600" align="left" cellspacing="10">
+			<tr>
+				<td><strong>Valores</strong><br>
+				Tipo: <textarea id="tipo" rows="1" cols="5"></textarea><br> 
+				Quantidade: <textarea id="quantidade" rows="1" cols="5">0</textarea><br>
+				Desconto: <textarea id="desconto" rows="1" cols="5">0</textarea><br>
+				<button class="button" onclick="calcular()">Gerar</button>
+				</td>
+				
+				<td id="mensagem" font="Verdana">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		function calcular(){
+			var qnt = document.getElementById("quantidade").value;
+			var tipo = document.getElementById("tipo").value;
+			var desc = document.getElementById("desconto").value;
+			
+			tipo = tipo.toLowerCase();
+			
+			if(tipo == "vhs"){
+				var valor1 = 33.00; //VHS/VHSC para DVD
+				var valor2 = 55.00; //VHS/VHSC para DVD + .MOV ou MP4
+				
+				//calcula os valores para VHS/VHSC para DVD
+				var total1 = qnt*valor1;
+				var valorDesconto1 = (total1*desc)/100.00
+				var totlalDesconto1 = total1 - valorDesconto1;
+				
+				//calcula os valores para VHS/VHSC para DVD + .MOV ou MP4
+				var total2 = qnt*valor2;
+				var valorDesconto2 = (total2*desc)/100.00
+				var totlalDesconto2 = total2 - valorDesconto2;
+				
+				//monta a mensagem para VHS/VHSC para DVD
+				var msn1 = "Orçamento para conversão de fitas VHS/VHSC para DVD<br>(até duas horas cada fita)<br>" + qnt + " x R$ "+valor1+" = "+total1;
+				if(desc > 0){
+					msn1 = msn1 + "<br>Desconto quantidade "+desc+"% "+valorDesconto1+"<br>*Total com desconto R$ "+totlalDesconto1+"*";
+				}else{
+					msn1 = msn1 + "<br>Valor total: R$ "+totlalDesconto1;
+				}
+				//monta a mensagem para VHS/VHSC para DVD + .MOC ou MP4
+				var msn2 = "Orçamento para conversão de fitas VHS/VHSC para DVD + Arquivo .MOV ou MP4<br>(até duas horas cada fita)<br>" + qnt + " x R$ "+valor2+" = "+total2;
+				if(desc > 0){
+					msn2 = msn2 + "<br>Desconto quantidade "+desc+"% "+valorDesconto2+"<br>*Total com desconto R$ "+totlalDesconto2+"*";
+				}else{
+					msn2 = msn2 + "<br>Valor total: R$ "+totlalDesconto2;
+				}
+				
+				//junta as duas mensagens em uma só
+				var msn3 = msn1+"<br><br>"+msn2;
+				
+				//manda a mensagem gerada na linha a sima para o a tag com id igual a mensagem
+				document.getElementById("mensagem").innerHTML = msn3;
+			}
+			
+			if(tipo == "hi8"){
+				var valor1 = 45.00; //Video8/hi8 para DVD
+				var valor2 = 67.00; //Video8/hi8 para DVD + .MOV ou MP4
+				
+				//calcula os valores para Video8/hi8 para DVD
+				var total1 = qnt*valor1;
+				var valorDesconto1 = (total1*desc)/100.00;
+				var totalDesconto1 = total1 - valorDesconto1;
+				
+				//calcula os valores para Video8/hi8 para DVD + .MOV ou MP4
+				var total2 = qnt*valor2;
+				var valorDesconto2 = (total2*desc)/100.00;
+				var totalDesconto2 = total2 - valorDesconto2;
+				
+				//monta a mensagem para VHS/VHSC para DVD
+				var msn1 = "Orçamento para conversão de fitas Video8/hi8 para DVD<br>"+qnt+" x R$ "+valor1+" = R$ "+total1;
+				if(desc > 0){
+					msn1 = msn1 + "<br>desconto " +desc+"% R$ "+valorDesconto1+"<br> Valor com desconto R$"+totalDesconto1;
+				}
+				//monta a mensagem para VHS/VHSC para DVD + .MOC ou MP4
+				var msn2 = "Orçamento para conversão de fitas Video8/hi8 para DVD + Arquivo .MOV ou MP4<br>"+qnt+" x R$ "+valor2+" = R$ "+total2;
+				if(desc > 0){
+					msn2 = msn2 + "<br>desconto " +desc+"% R$ "+valorDesconto2+"<br> Valor com desconto R$"+totalDesconto2;
+				}
+				
+				//junta as duas mensagens em uma só
+				var msn3 = msn1 + "<br><br>" + msn2;
+				
+				//manda a mensagem gerada na linha a sima para a tag com id igual a mensagem
+				document.getElementById("mensagem").innerHTML = msn3;
+			}
+			
+			if(tipo == "fotos" || tipo == "foto" || tipo == "fotografia"){
+				var valor = 2.50 //valor unitario dos fotos
+				
+				//calcula os valores para fotos
+				var total = qnt*valor;
+				var valorDesconto = (total*desc)/100.00;
+				var totalDesconto = total - valorDesconto;
+				
+				//monta a mensagem para slides fotos
+				var msn = "Orçamento para " + qnt +" fotografias<br>"+qnt+" x R$ "+valor+" = R$ "+total;
+				if(desc > 0){
+					msn = msn + "<br> Desconto quantidade "+desc+"% R$"+valorDesconto+"<br>Valor com desconto R$ "+totalDesconto;
+				}
+				
+				//manda a mensagem gerada na linha a sima para a tag com di igual a mensagem
+				document.getElementById("mensagem").innerHTML = msn;
+			}
+			
+			if(tipo == "slides" || tipo == "slide" || tipo == "negativo" || tipo == "negativos"){
+				var valor = 3.00 //valor unitario para slides e negativos
+				
+				//calcula os valores para fotos
+				var total = qnt*valor;
+				var valorDesconto = (total*desc)/100.00;
+				var totalDesconto = total - valorDesconto;
+				
+				//monta a mensagem para slides e negativo
+				var msn = "Orçamento "+qnt+" "+tipo+"(s)"+"<br>"+qnt+" x R$ "+ valor+ " = R$ "+total;
+				if(desc > 0){
+					msn = msn+"<br> Desconto quantidade "+desc+"% R$ "+valorDesconto+"<br> Valor com desconto R$ "+totalDesconto;
+				}
+				
+				//manda a mensagem gerada na linha a sima para a tag com di igual a mensagem
+				document.getElementById("mensagem").innerHTML = msn;
+			}
+		}
+	</script>
+</body>
+</html>
